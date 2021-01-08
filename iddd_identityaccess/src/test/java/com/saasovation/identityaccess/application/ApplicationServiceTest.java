@@ -54,6 +54,7 @@ public abstract class ApplicationServiceTest extends TestCase {
 
     public ApplicationServiceTest() {
         super();
+        System.setProperty("java.version", "1.7.");
     }
 
     protected Group group1Aggregate() {

@@ -7,7 +7,7 @@ mysqlPassword="root"
 mysqlContainerName="iddd-mysql"
 mysqlPort="3306"
 
-rabbitmqNodeName="$(hostname)"
+rabbitmqNodeName="my-rabbit"
 rabbitmqContainerName="iddd-rabbitmq"
 rabbitmqManagementHttpPort="8080"
 
@@ -17,7 +17,7 @@ containers[1]="${rabbitmqContainerName}"
 function start() {
     echo "Starting MySQL Server container..."
     docker rm -f "${mysqlContainerName}"
-    docker run --name "${mysqlContainerName}" -p "${mysqlPort}":3306 -e MYSQL_ROOT_PASSWORD="${mysqlPassword}" -d mysql
+    docker run --name "${mysqlContainerName}" -p "${mysqlPort}":3306 -e MYSQL_ROOT_PASSWORD="${mysqlPassword}" -d mysql:5.7
 
     echo "Waiting for MySQL Server to be up and running..."
     waitForContainer "${mysqlContainerName}" "mysqld: ready for connections."
@@ -52,7 +52,7 @@ function start() {
 
     echo "Starting RabbitMQ container..."
     docker rm -f "${rabbitmqContainerName}"
-    docker run --name "${rabbitmqContainerName}" -p 5672:5672 -p "${rabbitmqManagementHttpPort}":15672 -e RABBITMQ_NODENAME="${rabbitmqNodeName}" -d rabbitmq:3-management
+    docker run --name "${rabbitmqContainerName}" -p 5672:5672 -p "${rabbitmqManagementHttpPort}":15672 -e RABBITMQ_NODENAME="${rabbitmqNodeName}" -d rabbitmq:latest
     echo "Waiting for RabbitMQ to be up and running..."
     waitForContainer "${rabbitmqContainerName}" "Server startup complete;"
 
