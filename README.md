@@ -1,3 +1,12 @@
+运行项目需要执行startContainers.sh文件创建rabbitmq和mysql容器。
+
+每个模块都很简单，看例子的时候从单测开始看，每个模块涉及到的架构：
+- iddd_agilepm模块将领域事件发送到了消息队列，同时也是《实现领域驱动设计》第13章：通过消息集成限界上下文的实现
+- iddd_collaboration模块使用事件源和CQRS
+- iddd_collaboration模块ORM和领域事件
+
+除了每个模块用到的架构，值得学习的地方还有公共父类的实现，这些父类提供了哪些公共功能、类名和包名的定义、类所在包、领域服务能够直接引用哪些类，聚合根的方法可以接受领域服务作为方法参数、单测的编写等
+
 These are the sample Bounded Contexts from the book
 "Implementing Domain-Driven Design" by Vaughn Vernon:
 
